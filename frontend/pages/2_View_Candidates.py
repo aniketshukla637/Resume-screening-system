@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_BASE_URL = "http://127.0.0.1:8000"
+API_BASE_URL = "https://resume-screening-system-8v3e.onrender.com"
 st.set_page_config(page_title="View Candidates", page_icon="👥", layout="wide")
 
 # ---------- LOGIN CHECK ----------
