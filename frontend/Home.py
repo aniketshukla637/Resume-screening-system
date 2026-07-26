@@ -3,7 +3,7 @@ import requests
 
 # ---------- CONFIG ----------
 # Backend FastAPI server ka base URL - agar backend kisi aur port/host pe hai toh yahan badlo
-API_BASE_URL = "http://127.0.0.1:8000"
+API_BASE_URL = "https://resume-screening-system-8v3e.onrender.com"
 
 st.set_page_config(page_title="AI Resume Screening System", page_icon="📄", layout="centered")
 
