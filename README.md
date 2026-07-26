@@ -110,6 +110,11 @@ Frontend opens automatically in your browser.
 
 Aniket Shukla — Final-year B.Tech CSE (AI) student, Babu Banarasi Das University, Lucknow
 
+🔗 **Live Demo:** [https://resume-screening-system-ktdoh4jjfkfgr497xvedrc.streamlit.app/](https://resume-screening-system-ktdoh4jjfkfgr497xvedrc.streamlit.app/)
+
+🔗 **Backend API Docs:** [https://resume-screening-system-8v3e.onrender.com/docs](https://resume-screening-system-8v3e.onrender.com/docs)
+
 ## 📄 License
 
 This project is open source and available for educational use.
+
