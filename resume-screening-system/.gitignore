@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite3
+
+# Uploaded files (user data - never commit)
+data/uploads/*
+!data/uploads/.gitkeep
+data/sample_resumes/*.pdf
+data/sample_resumes/*.docx
+
+# ML model artifacts (large binary files)
+ml/saved_models/*.pkl
+ml/saved_models/*.joblib
+!ml/saved_models/.gitkeep
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
