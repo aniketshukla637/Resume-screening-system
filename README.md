@@ -1,79 +1,115 @@
-# AI Resume Screening & Candidate Ranking System
+# 🤖 AI Resume Screening & Candidate Ranking System
 
-An end-to-end system that automatically parses resumes, matches them against a job description, ranks candidates, predicts a suitability score, and generates interview questions — built to save recruiters hours of manual screening.
+An end-to-end system that automates resume screening for recruiters — upload resumes, automatically extract candidate details and skills, match them against a job description, and get a ranked, explainable shortlist of the best-fit candidates.
 
-## Status
-🚧 In progress — being built part by part.
+## 🎯 Problem It Solves
 
-- [x] Part 1: Project Planning (folder structure, tech stack, DB schema, architecture)
-- [ ] Part 2: Backend Setup
-- [ ] Part 3: Authentication
-- [ ] Part 4: Resume Parser
-- [ ] Part 5: OCR
-- [ ] Part 6: NLP
-- [ ] Part 7: Matching Engine
-- [ ] Part 8: ML Model
-- [ ] Part 9: Frontend
-- [ ] Part 10: Dashboard
-- [ ] Part 11: Deployment
-- [ ] Part 12: Testing
-- [ ] Part 13: Documentation
+Recruiters spend a huge amount of time manually reading through resumes to shortlist candidates. This system automates that process: it parses resumes, scores each candidate against a job's requirements, and ranks them — so recruiters can focus on interviewing the best matches instead of screening everything by hand.
 
-## Features (planned)
-- Upload multiple resumes (PDF/DOCX)
-- OCR for scanned/image resumes
-- Compare resumes against a job description
-- Rank candidates by suitability score
-- Display extracted top skills
-- Auto-generate interview questions
+## ✨ Features
 
-## Tech Stack
+- 🔐 **Secure Authentication** — JWT-based signup/login for recruiters
+- 📄 **Resume Parsing** — Upload PDF/DOCX resumes; automatically extracts candidate name, email, phone, and skills
+- 🎯 **Job–Candidate Matching** — Rule-based, synonym-aware scoring engine (70% skill match + 30% experience match)
+- 🏆 **Candidate Ranking** — Candidates are automatically ranked best-match-first for each job
+- ✅❌ **Skill Gap Analysis** — See exactly which required skills a candidate has and which they're missing
+- 🎤 **Interview Question Generator** — Auto-generates technical, skill-gap, and behavioral interview questions per candidate
+- 🖥️ **Clean Web UI** — Card-based candidate view with star ratings and progress bars (Streamlit)
+- 🗂️ **Domain Templates** — Quick-start job creation for common IT roles (Data Science, Backend, Frontend, DevOps, etc.)
+
+## 🛠️ Tech Stack
+
 | Layer | Technology |
 |---|---|
-| Backend API | FastAPI |
+| Backend | FastAPI (Python) |
 | Frontend | Streamlit |
-| Database | SQLite (dev), MySQL (prod) |
-| OCR | Tesseract, pdf2image, OpenCV |
-| NLP | spaCy, Sentence-Transformers, BERT/DistilBERT |
-| ML | XGBoost, Random Forest, scikit-learn |
-| Auth | JWT (python-jose), bcrypt |
+| Database | SQLite + SQLAlchemy ORM |
+| Auth | JWT (python-jose / bcrypt) |
+| Resume Parsing | pdfplumber, python-docx |
+| Matching Engine | Custom rule-based NLP (synonym-aware skill matching) |
 
-## Folder Structure
+> **Planned:** Upgrading the matching engine with ML (XGBoost/Random Forest) and semantic similarity (BERT / Sentence-Transformers) for smarter, meaning-aware candidate–job matching.
+
+## 📂 Project Structure
+
 ```
 resume-screening-system/
 ├── backend/
-│   ├── app/
-│   │   ├── routers/        # API route handlers
-│   │   ├── models/         # SQLAlchemy DB models
-│   │   ├── schemas/        # Pydantic request/response schemas
-│   │   ├── services/       # Business logic (parsing, matching, scoring)
-│   │   ├── core/           # Config, security, settings
-│   │   └── db/             # DB connection + schema.sql
-│   └── requirements.txt
+│   └── app/
+│       ├── core/         # config, security, JWT auth dependencies
+│       ├── db/           # database connection setup
+│       ├── models/       # SQLAlchemy ORM models
+│       ├── routers/      # API endpoints (auth, jobs, resumes)
+│       ├── schemas/      # Pydantic request/response schemas
+│       ├── services/     # resume parsing, matching engine, file handling
+│       └── main.py       # FastAPI app entry point
 ├── frontend/
-│   └── pages/               # Streamlit multi-page app
-├── ml/
-│   ├── training/            # Model training scripts
-│   ├── saved_models/        # Trained .pkl/.joblib files
-│   └── notebooks/           # Experimentation notebooks
+│   ├── Home.py           # Login / Signup page
+│   └── pages/
+│       ├── 1_Upload_Resume.py     # Job creation + resume upload
+│       └── 2_View_Candidates.py   # Ranked candidate cards + interview Qs
 ├── data/
-│   ├── uploads/              # User-uploaded resumes (gitignored)
-│   └── sample_resumes/       # Sample/test resumes
-├── docs/                     # Architecture, design docs
-├── .gitignore
-└── README.md
+│   ├── uploads/           # uploaded resumes (gitignored)
+│   └── sample_resumes/    # sample resumes for testing
+├── ml/                    # future ML model training + saved models
+└── docs/
+    └── ARCHITECTURE.md
 ```
 
-## Setup (to be completed in Part 2)
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.10+
+- pip
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/<your-username>/ai-resume-screening-system.git
+cd ai-resume-screening-system/resume-screening-system
+```
+
+### 2. Set up the backend
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+venv\Scripts\activate        # Windows
 pip install -r requirements.txt
+uvicorn app.main:app --reload
 ```
+Backend runs at `http://127.0.0.1:8000` — API docs available at `http://127.0.0.1:8000/docs`
 
-## Database
-See [`backend/app/db/schema.sql`](backend/app/db/schema.sql) for the full schema (users, jobs, resumes, resume_skills, scores, interview_questions, feedback).
+### 3. Set up the frontend
+Open a new terminal:
+```bash
+cd frontend
+pip install -r requirements.txt
+streamlit run Home.py
+```
+Frontend opens automatically in your browser.
 
-## Architecture
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the system design and data flow diagram.
+## 📸 How It Works
+
+1. **Sign up / Log in** as a recruiter
+2. **Create a job** — either pick a domain template (Data Science, Backend, Frontend, etc.) or enter details manually
+3. **Upload resumes** (PDF/DOCX) against that job — the system extracts candidate details automatically
+4. **View ranked candidates** — sorted by match score, with matched/missing skills clearly shown
+5. **Generate interview questions** for any candidate based on their skill gaps
+
+## 🗺️ Roadmap
+
+- [x] Authentication (JWT)
+- [x] Resume parsing (PDF/DOCX)
+- [x] Rule-based job matching & ranking
+- [x] Interview question generation
+- [x] Card-based candidate UI
+- [ ] ML-based suitability prediction (XGBoost/Random Forest)
+- [ ] Semantic matching with BERT / Sentence-Transformers
+- [ ] Deployment (Render + Streamlit Community Cloud)
+
+## 👤 Author
+
+Aniket Shukla — Final-year B.Tech CSE (AI) student, Babu Banarasi Das University, Lucknow
+
+## 📄 License
+
+This project is open source and available for educational use.
